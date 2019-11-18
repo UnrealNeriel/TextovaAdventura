@@ -8,6 +8,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
 
 
 /**
@@ -35,7 +36,7 @@ public class Start extends Application
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        GridPane root = new GridPane();
+        GridPane root = FXMLLoader.load(getClass().getResource("/home.fxml"));
         Scene home = new Scene(root);
         primaryStage.setScene(home);
         primaryStage.show();
