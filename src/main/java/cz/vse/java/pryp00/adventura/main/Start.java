@@ -36,10 +36,11 @@ public class Start extends Application
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        GridPane root = FXMLLoader.load(getClass().getResource("/home.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/home.fxml"));
+        GridPane root =  loader.load();
         Scene home = new Scene(root);
         primaryStage.setScene(home);
         primaryStage.show();
-
     }
 }
