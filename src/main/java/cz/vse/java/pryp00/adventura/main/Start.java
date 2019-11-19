@@ -39,6 +39,9 @@ public class Start extends Application
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/home.fxml"));
         GridPane root =  loader.load();
+
+        HomeController controller = loader.getController();
+
         Scene home = new Scene(root);
         primaryStage.setScene(home);
         primaryStage.show();
