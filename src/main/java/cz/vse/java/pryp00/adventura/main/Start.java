@@ -44,6 +44,7 @@ public class Start extends Application
 
         Scene home = new Scene(root);
         primaryStage.setScene(home);
+        controller.zaktivniVstup();
         primaryStage.show();
     }
 }

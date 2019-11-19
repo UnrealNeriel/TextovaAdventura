@@ -19,12 +19,30 @@ public class HomeController extends GridPane {
 
     public void initialize() {
         vystup.setText(hra.vratUvitani()+"\n\n");
+        vystup.setEditable(false);
     }
 
-    public void zpracujVstup(ActionEvent actionEvent) {
+    public void zaktivniVstup() {
+        vstup.requestFocus();
+    }
+
+    private void zacniHru() {
         vystup.appendText("Příkaz: "+vstup.getText()+"\n");
         String vysledek = hra.zpracujPrikaz(vstup.getText());
         vystup.appendText(vysledek+"\n\n");
         vstup.clear();
+    }
+
+    private void zkontrolujKonecHry() {
+        if(hra.konecHry()) {
+            vystup.appendText(hra.vratEpilog());
+            vstup.setDisable(true);
+        }
+    }
+
+
+    public void zpracujVstup(ActionEvent actionEvent) {
+        zacniHru();
+        zkontrolujKonecHry();
     }
 }
