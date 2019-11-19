@@ -23,15 +23,19 @@ public class Start extends Application
      */
     public static void main(String[] args)
     {
-    /*    try {
-             System.out.println(args[0]);
-             System.exit(0);
-        } catch (ArrayIndexOutOfBoundsException e) {
+    try {
+        int parametr = args[0].compareTo("text");
+        if (parametr == 0) {
             IHra hra = new Hra();
             TextoveRozhrani ui = new TextoveRozhrani(hra);
             ui.hraj();
-        } */
-    launch(args);
+        } else {
+            System.out.println("Neplatný parametr, jediný platný je: text");
+            System.exit(1);
+        }
+    } catch (ArrayIndexOutOfBoundsException e) {
+        launch(args);
+    }
     }
 
     @Override

@@ -12,6 +12,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,12 +56,18 @@ public class HomeController extends GridPane implements IObserver {
             vystup.appendText(hra.vratEpilog());
             vstup.setDisable(true);
             odesli.setDisable(true);
+            seznamVychodu.setDisable(true);
         }
     }
 
     public void zpracujVstup(ActionEvent actionEvent) {
-        vystup.appendText("Příkaz: "+vstup.getText()+"\n");
-        String vysledek = hra.zpracujPrikaz(vstup.getText());
+        zpracujPrikaz(vstup.getText());
+    }
+
+
+    private void zpracujPrikaz(String prikaz) {
+        vystup.appendText("Příkaz: "+prikaz+"\n");
+        String vysledek = hra.zpracujPrikaz(prikaz);
         vystup.appendText(vysledek+"\n\n");
         vstup.clear();
         zkontrolujKonecHry();
@@ -75,5 +82,10 @@ public class HomeController extends GridPane implements IObserver {
         hrac.setX(souradniceProstoru.get(nazevProstoru).getX());
         hrac.setY(souradniceProstoru.get(nazevProstoru).getY());
 
+    }
+
+    public void kliknutiNaVychod(MouseEvent mouseEvent) {
+        Prostor prostor = (Prostor) seznamVychodu.getSelectionModel().getSelectedItem();
+        zpracujPrikaz("jdi "+prostor.getNazev());
     }
 }
