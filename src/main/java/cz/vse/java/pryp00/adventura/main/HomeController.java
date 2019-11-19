@@ -1,16 +1,14 @@
 package cz.vse.java.pryp00.adventura.main;
 
+import cz.vse.java.pryp00.adventura.logika.HerniPlan;
 import cz.vse.java.pryp00.adventura.logika.Hra;
 import cz.vse.java.pryp00.adventura.logika.IHra;
 import cz.vse.java.pryp00.adventura.logika.Prostor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
@@ -28,6 +26,8 @@ public class HomeController extends GridPane implements IObserver {
     public ListView seznamVychodu;
     @FXML
     public ImageView hrac;
+    @FXML
+    public MenuItem novaHra;
 
     private Map<String, Point2D> souradniceProstoru = new HashMap<>();
 
@@ -87,5 +87,12 @@ public class HomeController extends GridPane implements IObserver {
     public void kliknutiNaVychod(MouseEvent mouseEvent) {
         Prostor prostor = (Prostor) seznamVychodu.getSelectionModel().getSelectedItem();
         zpracujPrikaz("jdi "+prostor.getNazev());
+    }
+
+    public void zacniNovouHru(ActionEvent actionEvent) {
+        this.hra = new Hra();
+        initialize();
+        HerniPlan.hracJeOblecen = false;
+        System.out.println("Začala nová hra");
     }
 }
