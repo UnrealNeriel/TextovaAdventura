@@ -204,4 +204,12 @@ public class Prostor {
         }
         return nalezenaVec;
     }
+
+    /**
+     * @return nazev prostoru
+     */
+    public String toString() {
+        return getNazev();
+    }
+
 }

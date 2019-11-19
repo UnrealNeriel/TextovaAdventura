@@ -1,9 +1,17 @@
 package cz.vse.java.pryp00.adventura.logika;
 
-public class HerniPlan {
+import cz.vse.java.pryp00.adventura.main.IObserver;
+import cz.vse.java.pryp00.adventura.main.ISubject;
+import java.util.HashSet;
+import java.util.Set;
+
+
+public class HerniPlan implements ISubject {
     public static boolean hracJeOblecen = false;
     private Prostor aktualniProstor;
     private Prostor viteznyProstor;
+
+    private Set<IObserver> seznamPozorovatelu = new HashSet<>();
     
      /**
      *  Konstruktor který vytváří jednotlivé prostory a propojuje je pomocí východů.
@@ -72,6 +80,7 @@ public class HerniPlan {
      */
     public void setAktualniProstor(Prostor prostor) {
        aktualniProstor = prostor;
+       notifyObservers();
     }
 
     /**
@@ -80,5 +89,22 @@ public class HerniPlan {
      */
     public Prostor getViteznyProstor() {
         return viteznyProstor;
+    }
+
+    @Override
+    public void registerObserver(IObserver observer) {
+        seznamPozorovatelu.add(observer);
+    }
+
+    @Override
+    public void unregisterObserver(IObserver observer) {
+        seznamPozorovatelu.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for(IObserver observer : seznamPozorovatelu) {
+            observer.update();
+        }
     }
 }
