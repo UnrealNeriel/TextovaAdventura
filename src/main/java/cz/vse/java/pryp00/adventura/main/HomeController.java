@@ -123,4 +123,13 @@ public class HomeController extends GridPane implements IObserver {
         HerniPlan.hracJeOblecen = false;
         System.out.println("Začala nová hra");
     }
+
+    public void vypisNapovedu(ActionEvent actionEvent) {
+        Stage stage = new Stage();
+        WebView webView = new WebView();
+        webView.getEngine().load(getClass().getResource("/napoveda.html").toExternalForm());
+        stage.setScene(new Scene(webView, 1200, 650));
+        stage.show();
+        System.out.println("Vypsání nápovědy");
+    }
 }
