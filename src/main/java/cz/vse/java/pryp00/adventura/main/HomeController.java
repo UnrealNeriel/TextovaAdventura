@@ -1,16 +1,20 @@
 package cz.vse.java.pryp00.adventura.main;
 
-import cz.vse.java.pryp00.adventura.logika.HerniPlan;
-import cz.vse.java.pryp00.adventura.logika.Hra;
-import cz.vse.java.pryp00.adventura.logika.IHra;
-import cz.vse.java.pryp00.adventura.logika.Prostor;
+import cz.vse.java.pryp00.adventura.logika.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,9 +32,12 @@ public class HomeController extends GridPane implements IObserver {
     public ImageView hrac;
     @FXML
     public MenuItem novaHra;
+    @FXML
+    public MenuItem napoveda;
 
     private Map<String, Point2D> souradniceProstoru = new HashMap<>();
-
+    private Map<String, String> adresyObrazku = new HashMap<>();
+    private ListView<Vec> batohListView = new ListView<>();
 
     private IHra hra = new Hra();
 
@@ -45,7 +52,28 @@ public class HomeController extends GridPane implements IObserver {
         souradniceProstoru.put("park",new Point2D(219,39));
         souradniceProstoru.put("kamaraduv_byt",new Point2D(292,85));
         update();
-    }
+
+        /*batohListView.setCellFactory(listView -> new ListCell<Vec>() {
+            private ImageView ikonaView = new ImageView();
+
+            @Override
+            public void updateItem(Vec vec, boolean empty) {
+                super.updateItem(vec, empty);
+                if (empty) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    Image ikona = new Image(adresyObrazku.get(vec.getJmeno()));
+                    ikonaView.setSmooth(true);
+                    ikonaView.setFitHeight(30);
+                    ikonaView.setFitWidth(30);
+                    ikonaView.setImage(ikona);
+                    setText(vec.getJmeno());
+                    setGraphic(ikonaView);
+                }
+            }
+        });*/
+        }
 
     public void zaktivniVstup() {
         vstup.requestFocus();
