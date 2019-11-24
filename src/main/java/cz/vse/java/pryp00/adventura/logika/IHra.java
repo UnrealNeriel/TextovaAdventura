@@ -33,13 +33,16 @@ public interface IHra
      */
      public String zpracujPrikaz(String radek);
 
-     /**
-     *  Metoda vrátí odkaz na herní plán, je využita hlavně v testech,
-     *  kde se jejím prostřednictvím získává aktualní místnost hry.
-     *  
+    /**
+     *  Metoda vrátí odkaz na herní plán,
+     *  jejím prostřednictvím získává aktualní místnost hry.
      *  @return     odkaz na herní plán
      */
      public HerniPlan getHerniPlan();
 
+    /**
+     * Metoda vraci batoh
+     * @return Batoh
+     */
      public Batoh getBatoh();
 }

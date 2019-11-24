@@ -13,7 +13,6 @@ import java.util.Scanner;
  *  Pokud chcete hrát tuto hru, vytvořte instanci této třídy
  *  a poté na ní vyvolejte metodu "hraj".
  */
-
 public class TextoveRozhrani {
     private IHra hra;
 

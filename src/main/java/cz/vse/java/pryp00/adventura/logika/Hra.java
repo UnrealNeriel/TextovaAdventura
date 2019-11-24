@@ -7,7 +7,6 @@ package cz.vse.java.pryp00.adventura.logika;
  *  a vytváří seznam platných příkazů a instance tříd provádějící jednotlivé příkazy.
  *  Vypisuje uvítací a ukončovací text hry. Také vyhodnocuje jednotlivé příkazy zadané uživatelem.
  */
-
 public class Hra implements IHra {
     private SeznamPrikazu platnePrikazy;    // obsahuje seznam přípustných příkazů
     private HerniPlan herniPlan;
@@ -94,14 +93,18 @@ public class Hra implements IHra {
     }
     
      /**
-     *  Metoda vrátí odkaz na herní plán, je využita hlavně v testech,
-     *  kde se jejím prostřednictvím získává aktualní místnost hry.
+     *  Metoda vrátí odkaz na herní plán,
+     *  jejím prostřednictvím získává aktualní místnost hry.
      *  @return     odkaz na herní plán
      */
      public HerniPlan getHerniPlan(){
         return herniPlan;
      }
 
+    /**
+     * Metoda vraci batoh
+     * @return Batoh
+     */
      public Batoh getBatoh() {
          return this.batoh;
      }

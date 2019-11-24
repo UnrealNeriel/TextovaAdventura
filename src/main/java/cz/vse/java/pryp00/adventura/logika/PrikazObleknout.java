@@ -1,5 +1,8 @@
 package cz.vse.java.pryp00.adventura.logika;
 
+/**
+ *  Třída PrikazObleknout implementuje pro hru příkaz obleknout.
+ */
 public class PrikazObleknout implements IPrikaz
 {
 
@@ -7,11 +10,21 @@ public class PrikazObleknout implements IPrikaz
     private HerniPlan plan;
     private Batoh batoh;
 
+    /**
+     *  Konstruktor třídy
+     */
     public PrikazObleknout(HerniPlan plan, Batoh batoh) {
         this.plan = plan;
         this.batoh = batoh;
     }
 
+    /**
+     * Provadi prikaz "obleknout", ktery pak premeni promennou na true, ktera nesledne
+     * dovoli hraci jit do vsech prostoru
+     *
+     * @param parametry je potreba prave 1 parametr, vec ktere chcete obleknout
+     * @return zpráva, kterou vypíše hra hráči
+     */
     @Override
     public String proved(String... parametry) {
         if (parametry.length == 0) {
@@ -36,6 +49,10 @@ public class PrikazObleknout implements IPrikaz
         }
     }
 
+    /**
+     * Metoda vrací název příkazu (slovo které používá hráč pro jeho vyvolání)
+     * @ return nazev prikazu
+     */
     @Override
     public String getNazev() {
         return NAZEV;

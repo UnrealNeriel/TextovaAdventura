@@ -9,8 +9,7 @@ class PrikazNapoveda implements IPrikaz {
     private static final String NAZEV = "napoveda";
     private SeznamPrikazu platnePrikazy;
     
-    
-     /**
+    /**
     *  Konstruktor třídy
     *  
     *  @param platnePrikazy seznam příkazů,

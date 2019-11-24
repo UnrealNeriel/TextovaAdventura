@@ -9,10 +9,9 @@ private static final String NAZEV = "vezmi";
     private HerniPlan plan;
     private Batoh batoh;
 
-  /**
+    /**
     *  Konstruktor třídy
-    *  
-    *  @param plan herní plán, ve kterém se bude hledat aktuální místnost 
+    *  @param plan herní plán, ve kterém se bude hledat aktuální místnost
     */      
     public PrikazVezmi(HerniPlan plan, Batoh batoh) {
         this.plan = plan;
@@ -47,6 +46,10 @@ private static final String NAZEV = "vezmi";
         }
     }
 
+    /**
+     * Metoda vrací název příkazu (slovo které používá hráč pro jeho vyvolání)
+     * @ return nazev prikazu
+     */
     public String getNazev() {
         return NAZEV;
     }

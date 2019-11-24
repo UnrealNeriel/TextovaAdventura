@@ -8,15 +8,28 @@ public class Vec
     private String jmeno;
     private boolean prenositelna;
 
-    public Vec (String jmeno, boolean prenositelna) {
+	/**
+	 * Kontruktor tridy veci
+	 * @param jmeno jednoznacny nazev veci
+	 * @param prenositelna oznacuje zda hrac muze vec polozit do batohu ci nikoliv
+	 */
+	public Vec (String jmeno, boolean prenositelna) {
 		this.jmeno = jmeno;
 		this.prenositelna = prenositelna;
 	}
 
+	/**
+	 * Metoda vraci nazev veci
+	 * @return nazev veci
+	 */
     public String getJmeno () {
 		return jmeno;
 	}
 
+	/**
+	 * Metoda vraci prenositelnost veci
+	 * @return prenositelnost veci
+	 */
 	public boolean jePrenositelna() {
 		return prenositelna;
 	}

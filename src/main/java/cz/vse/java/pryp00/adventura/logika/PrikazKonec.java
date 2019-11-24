@@ -4,7 +4,6 @@ package cz.vse.java.pryp00.adventura.logika;
  *  Třída PrikazKonec implementuje pro hru příkaz konec.
  *  Tato třída je součástí jednoduché textové hry.
  */
-
 class PrikazKonec implements IPrikaz {
 
     private static final String NAZEV = "konec";
@@ -13,7 +12,6 @@ class PrikazKonec implements IPrikaz {
 
     /**
      *  Konstruktor třídy
-     *  
      *  @param hra odkaz na hru, která má být příkazem konec ukončena
      */    
     public PrikazKonec(Hra hra) {
@@ -39,7 +37,6 @@ class PrikazKonec implements IPrikaz {
 
     /**
      *  Metoda vrací název příkazu (slovo které používá hráč pro jeho vyvolání)
-     *  
      *  @ return nazev prikazu
      */
     @Override

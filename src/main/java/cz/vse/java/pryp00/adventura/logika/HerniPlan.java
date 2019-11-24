@@ -49,6 +49,7 @@ public class HerniPlan implements ISubject {
         aktualniProstor = pokoj;  // hra začíná v pokoji
         viteznyProstor = kamaraduvByt ;
 
+        // prirazeni veci do prostoru
         pokoj.vlozVec(new Vec("obleceni", true));
         pokoj.vlozVec(new Vec("penezenka", true));
         pokoj.vlozVec(new Vec("klice", true));
@@ -91,16 +92,27 @@ public class HerniPlan implements ISubject {
         return viteznyProstor;
     }
 
+    /**
+     * Registrace pozorovatele změn
+     * @param observer pozorovatel změn
+     */
     @Override
     public void registerObserver(IObserver observer) {
         seznamPozorovatelu.add(observer);
     }
 
+    /**
+     * Odebrání ze seznamu pozorovatelů
+     * @param observer pozorovatel změn
+     */
     @Override
     public void unregisterObserver(IObserver observer) {
         seznamPozorovatelu.remove(observer);
     }
 
+    /**
+     * Upozornění registrovaných pozorovatelů na změnu
+     */
     @Override
     public void notifyObservers() {
         for(IObserver observer : seznamPozorovatelu) {

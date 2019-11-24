@@ -19,6 +19,7 @@ public class Start extends Application
 {
     /**
      * Metoda, prostřednictvím níž se spouští celá aplikace.
+     * s parametrem "text" spousti aplikace bez grafickeho rozhrani
      * @param args Parametry příkazového řádku
      */
     public static void main(String[] args)
@@ -35,9 +36,15 @@ public class Start extends Application
         }
     } catch (ArrayIndexOutOfBoundsException e) {
         launch(args);
-    }
+        }
     }
 
+    /**
+     * Metoda, ktera sestavi graficke rozhrani hry
+     *
+     * @param primaryStage hlavni graficke okno, ve kterem probiha hra
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();

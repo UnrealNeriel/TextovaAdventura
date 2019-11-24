@@ -21,6 +21,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Ovladac FXML souboru, obsahuje nastroje pro ovladani hry v grafickem rozhrani
+ */
 public class HomeController extends GridPane implements IObserver {
     @FXML
     public TextField vstup;
@@ -42,6 +45,9 @@ public class HomeController extends GridPane implements IObserver {
     private Map<String, Point2D> souradniceProstoru = new HashMap<>();
     private IHra hra = new Hra();
 
+    /**
+     * provadi hlavni inicializaci hry pri spusteni
+     */
     public void initialize() {
         vystup.setText(hra.vratUvitani()+"\n\n");
         vystup.setEditable(false);
@@ -56,10 +62,16 @@ public class HomeController extends GridPane implements IObserver {
         update();
         }
 
+    /**
+     * umozni hraci rovnou pouzivat pole vstupu bez kliknuti mysi
+     */
     public void zaktivniVstup() {
         vstup.requestFocus();
     }
 
+    /**
+     * Kontroluje, zda hra jiz neskoncila
+     */
     private void zkontrolujKonecHry() {
         if(hra.konecHry()) {
             vystup.appendText(hra.vratEpilog());
@@ -69,10 +81,18 @@ public class HomeController extends GridPane implements IObserver {
         }
     }
 
+    /**
+     * reaguje na vstup hrace
+     * @param actionEvent
+     */
     public void zpracujVstup(ActionEvent actionEvent) {
         zpracujPrikaz(vstup.getText());
     }
 
+    /**
+     * zpracuje zadany prikaz
+     * @param prikaz vstup pro ovladani hry
+     */
     private void zpracujPrikaz(String prikaz) {
         vystup.appendText("Příkaz: "+prikaz+"\n");
         String vysledek = hra.zpracujPrikaz(prikaz);
@@ -82,6 +102,9 @@ public class HomeController extends GridPane implements IObserver {
         zobrazitObrazky();
     }
 
+    /**
+     * provadi aktualizaci na zmeny
+     */
     @Override
     public void update() {
         System.out.println("aktualizace");
@@ -92,11 +115,19 @@ public class HomeController extends GridPane implements IObserver {
         hrac.setY(souradniceProstoru.get(nazevProstoru).getY());
     }
 
+    /**
+     * umoznuje hraci rovnou klikat na prostor misto zadavani prikazu pro prechod
+     * @param mouseEvent
+     */
     public void kliknutiNaVychod(MouseEvent mouseEvent) {
         Prostor prostor = (Prostor) seznamVychodu.getSelectionModel().getSelectedItem();
         zpracujPrikaz("jdi "+prostor.getNazev());
     }
 
+    /**
+     * zahodi soucasne rozehranou hru a zalozi zcela novou
+     * @param actionEvent
+     */
     public void zacniNovouHru(ActionEvent actionEvent) {
         this.hra = new Hra();
         initialize();
@@ -113,6 +144,10 @@ public class HomeController extends GridPane implements IObserver {
         System.out.println("Začala nová hra");
     }
 
+    /**
+     * vypise napovedu
+     * @param actionEvent
+     */
     public void vypisNapovedu(ActionEvent actionEvent) {
         Stage stage = new Stage();
         WebView webView = new WebView();
@@ -122,6 +157,9 @@ public class HomeController extends GridPane implements IObserver {
         System.out.println("Vypsání nápovědy");
     }
 
+    /**
+     * zobrazi obrazky sebranych veci v inventari
+     */
     public void zobrazitObrazky() {
         veciVbatohu.getItems().clear();
         Set<String> seznam = hra.getBatoh().vratVeci();

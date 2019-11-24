@@ -3,14 +3,13 @@ package cz.vse.java.pryp00.adventura.logika;
 /**
  *  Třída PrikazPoloz implementuje pro hru příkaz poloz.
  */
-
 public class PrikazPoloz implements IPrikaz
 {
-private static final String NAZEV = "poloz";
+    private static final String NAZEV = "poloz";
     private HerniPlan plan;
     private Batoh batoh;
 
-  /**
+    /**
     *  Konstruktor třídy
     *  
     *  @param plan herní plán, ve kterém se bude hledat aktuální místnost 
@@ -21,13 +20,13 @@ private static final String NAZEV = "poloz";
     }
 
     /**
-     *  Provádí příkaz "poloz". V batohu hledá věc, která je předána jako parametr
-     *  pokud ji najde, vyjme ji z bathu a vloží do aktuální místnosti 
-     *
-     *@param parametry - jako  parametr obsahuje jméno věci,
-     *                          která se má položit.
-     *@return zpráva, kterou vypíše hra hráči
-     */ 
+    *  Provádí příkaz "poloz". V batohu hledá věc, která je předána jako parametr
+    *  pokud ji najde, vyjme ji z bathu a vloží do aktuální místnosti
+    *
+    *@param parametry - jako  parametr obsahuje jméno věci,
+    *                          která se má položit.
+    *@return zpráva, kterou vypíše hra hráči
+    */
     public String proved(String... parametry) {
         if (parametry.length == 0) {
             // pokud chybí druhé slovo , tak ....
@@ -48,6 +47,11 @@ private static final String NAZEV = "poloz";
             return "Položil jsi " + jmenoVeci;
         }
     }
+
+    /**
+     * Metoda vrací název příkazu (slovo které používá hráč pro jeho vyvolání)
+     * @ return nazev prikazu
+     */
     public String getNazev() {
         return NAZEV;
     }

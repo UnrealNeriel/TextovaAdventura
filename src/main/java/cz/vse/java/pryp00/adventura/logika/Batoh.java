@@ -5,6 +5,10 @@ import cz.vse.java.pryp00.adventura.main.ISubject;
 
 import java.util.*;
 
+/**
+ * Třída batoh
+ * představuje uložiště pro {@link Vec} behem hry pro hrace
+ */
 public class Batoh implements ISubject
 {
 private Map<String, Vec> seznamVeci ;   // seznam věcí v batohu
@@ -46,16 +50,27 @@ seznamVeci = new HashMap<String, Vec>();
         return nalezenaVec;
     }
 
+    /**
+     * Registrace pozorovatele změn
+     * @param observer pozorovatel změn
+     */
     @Override
     public void registerObserver(IObserver observer) {
         seznamPozorovatelu.add(observer);
     }
 
+    /**
+     * Odebrání ze seznamu pozorovatelů
+     * @param observer pozorovatel změn
+     */
     @Override
     public void unregisterObserver(IObserver observer) {
         seznamPozorovatelu.remove(observer);
     }
 
+    /**
+     * Upozornění registrovaných pozorovatelů na změnu
+     */
     @Override
     public void notifyObservers() {
         for (IObserver observer : seznamPozorovatelu) {
@@ -63,6 +78,9 @@ seznamVeci = new HashMap<String, Vec>();
         }
     }
 
+    /**
+     * @return set, ktery ma klice hash mapy.
+     */
     public Set<String> vratVeci() {
         return this.seznamVeci.keySet();
     }
