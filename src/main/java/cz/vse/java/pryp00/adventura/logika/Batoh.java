@@ -1,11 +1,14 @@
 package cz.vse.java.pryp00.adventura.logika;
 
-import java.util.HashMap;
-import java.util.Map;
+import cz.vse.java.pryp00.adventura.main.IObserver;
+import cz.vse.java.pryp00.adventura.main.ISubject;
 
-public class Batoh
+import java.util.*;
+
+public class Batoh implements ISubject
 {
 private Map<String, Vec> seznamVeci ;   // seznam věcí v batohu
+private Set<IObserver> seznamPozorovatelu = new HashSet<>();
 
 public Batoh () {
 seznamVeci = new HashMap<String, Vec>();
@@ -41,5 +44,26 @@ seznamVeci = new HashMap<String, Vec>();
             seznamVeci.remove(jmeno);
         }   
         return nalezenaVec;
+    }
+
+    @Override
+    public void registerObserver(IObserver observer) {
+        seznamPozorovatelu.add(observer);
+    }
+
+    @Override
+    public void unregisterObserver(IObserver observer) {
+        seznamPozorovatelu.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (IObserver observer : seznamPozorovatelu) {
+            observer.update();
+        }
+    }
+
+    public Set<String> vratVeci() {
+        return this.seznamVeci.keySet();
     }
 }

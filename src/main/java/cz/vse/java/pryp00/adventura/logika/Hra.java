@@ -35,7 +35,7 @@ public class Hra implements IHra {
      */
     public String vratUvitani() {
         return "Vítej!\n" +
-               "Kamarád tě pozval pařit do jeho bytu a ty jsi tu pozvánku přijal, tak se k němu musíš dostat.\n" +
+               "Kamarád tě pozval pařit do jeho bytu a ty jdi pozvánku přijal, tak se k němu musíš dostat.\n" +
                "Napište 'napoveda', pokud si nevíte rady, jak hrát dál.\n" +
                "\n" +
                herniPlan.getAktualniProstor().dlouhyPopis();
@@ -100,5 +100,9 @@ public class Hra implements IHra {
      */
      public HerniPlan getHerniPlan(){
         return herniPlan;
+     }
+
+     public Batoh getBatoh() {
+         return this.batoh;
      }
 }

@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -18,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class HomeController extends GridPane implements IObserver {
     @FXML
@@ -34,17 +36,17 @@ public class HomeController extends GridPane implements IObserver {
     public MenuItem novaHra;
     @FXML
     public MenuItem napoveda;
+    @FXML
+    public ListView veciVbatohu;
 
     private Map<String, Point2D> souradniceProstoru = new HashMap<>();
-    private Map<String, String> adresyObrazku = new HashMap<>();
-    private ListView<Vec> batohListView = new ListView<>();
-
     private IHra hra = new Hra();
 
     public void initialize() {
         vystup.setText(hra.vratUvitani()+"\n\n");
         vystup.setEditable(false);
         hra.getHerniPlan().registerObserver(this);
+        hra.getBatoh().registerObserver(this);
         souradniceProstoru.put("pokoj",new Point2D(2,84));
         souradniceProstoru.put("dvur",new Point2D(74,38));
         souradniceProstoru.put("ulice",new Point2D(147,82));
@@ -52,27 +54,6 @@ public class HomeController extends GridPane implements IObserver {
         souradniceProstoru.put("park",new Point2D(219,39));
         souradniceProstoru.put("kamaraduv_byt",new Point2D(292,85));
         update();
-
-        /*batohListView.setCellFactory(listView -> new ListCell<Vec>() {
-            private ImageView ikonaView = new ImageView();
-
-            @Override
-            public void updateItem(Vec vec, boolean empty) {
-                super.updateItem(vec, empty);
-                if (empty) {
-                    setText(null);
-                    setGraphic(null);
-                } else {
-                    Image ikona = new Image(adresyObrazku.get(vec.getJmeno()));
-                    ikonaView.setSmooth(true);
-                    ikonaView.setFitHeight(30);
-                    ikonaView.setFitWidth(30);
-                    ikonaView.setImage(ikona);
-                    setText(vec.getJmeno());
-                    setGraphic(ikonaView);
-                }
-            }
-        });*/
         }
 
     public void zaktivniVstup() {
@@ -92,13 +73,13 @@ public class HomeController extends GridPane implements IObserver {
         zpracujPrikaz(vstup.getText());
     }
 
-
     private void zpracujPrikaz(String prikaz) {
         vystup.appendText("Příkaz: "+prikaz+"\n");
         String vysledek = hra.zpracujPrikaz(prikaz);
         vystup.appendText(vysledek+"\n\n");
         vstup.clear();
         zkontrolujKonecHry();
+        zobrazitObrazky();
     }
 
     @Override
@@ -109,7 +90,6 @@ public class HomeController extends GridPane implements IObserver {
         String nazevProstoru = hra.getHerniPlan().getAktualniProstor().getNazev();
         hrac.setX(souradniceProstoru.get(nazevProstoru).getX());
         hrac.setY(souradniceProstoru.get(nazevProstoru).getY());
-
     }
 
     public void kliknutiNaVychod(MouseEvent mouseEvent) {
@@ -121,6 +101,15 @@ public class HomeController extends GridPane implements IObserver {
         this.hra = new Hra();
         initialize();
         HerniPlan.hracJeOblecen = false;
+        vystup.appendText(hra.vratUvitani());
+        vstup.setDisable(false);
+        odesli.setDisable(false);
+        seznamVychodu.setDisable(false);
+        veciVbatohu.getItems().clear();
+        zaktivniVstup();
+        vystup.clear();
+        vystup.setText(hra.vratUvitani()+"\n\n");
+
         System.out.println("Začala nová hra");
     }
 
@@ -131,5 +120,16 @@ public class HomeController extends GridPane implements IObserver {
         stage.setScene(new Scene(webView, 1200, 650));
         stage.show();
         System.out.println("Vypsání nápovědy");
+    }
+
+    public void zobrazitObrazky() {
+        veciVbatohu.getItems().clear();
+        Set<String> seznam = hra.getBatoh().vratVeci();
+        for(String vec : seznam){
+            ImageView obrazek = new ImageView();
+            obrazek.setImage(new Image("/" + vec.toLowerCase() + ".png"));
+            veciVbatohu.getItems().add(obrazek);
+        }
+        zaktivniVstup();
     }
 }

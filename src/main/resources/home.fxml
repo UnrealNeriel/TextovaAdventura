@@ -87,6 +87,6 @@
                 </HBox>
             </content>
         </TitledPane>
-
+      <ListView fx:id="veciVbatohu" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
     </children>
 </GridPane>
